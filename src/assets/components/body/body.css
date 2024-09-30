@@ -1,0 +1,71 @@
+.body-wrapper{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  
+}
+
+.sec1-wrapper{
+  padding-left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.sec1-wrapper>div{
+  display: flex;
+  height: 17rem;
+  width: 12rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sec1-wrapper>div:hover{
+  z-index: 20;
+}
+
+.sec1-wrapper > div > img {
+  height: 17rem;
+  width: 12rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.sec1-wrapper > div > img:hover {
+  transform: scale(1.162);
+}
+
+.sec2-wrapper{
+  position: absolute;
+  top: 94%;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+}
+
+.sec2-wrapper>div{
+  flex-shrink: 0;
+  position: relative;
+  width: 16px;
+  height: 0.9rem;
+  cursor: pointer;
+}
+
+.sec2-wrapper>div:hover >div{
+   background-color: rgb(145, 145, 145) !important;
+}
+
+.sec2-wrapper>div>div{
+  display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+  background-color: black;
+  transition: transform 0.3s ease;
+}
+

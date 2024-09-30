@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+    --cursor-color: #cdcac6;
+    --p-side: calc((30 / var(--gfs))* 1rem);
+    --gfs: 31;
+    --accent-color: #f7f5f2;
+    --dark-color: #28282a;
+    --dark-bg: #000;
+}
+
+html,
+body{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--accent-color);
+}
