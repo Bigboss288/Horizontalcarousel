@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './body.css'
 import gsap from 'gsap'
 import { Observer } from 'gsap/Observer';
+import Nav from '../Nav/Nav';
 // import Card from '../card/Card';
 
 gsap.registerPlugin(Observer);
@@ -13,15 +14,16 @@ const Body = () => {
 
   const [result, setResult] = useState(0)
   const loopRef = useRef({})
+  const [percent,setPercent] = useState(0)
   const containerRef = useRef(null)
   const navigate = useNavigate()
 
 
   useEffect(() => {
     // Fade in effect on page load
-    gsap.fromTo(containerRef.current, 
+    gsap.fromTo(containerRef.current,
       { opacity: 0 },  // Initial state
-      { 
+      {
         opacity: 1,     // Final state
         duration: 1,    // Duration of 1 second
         ease: "power1.inOut" // Easing function
@@ -44,6 +46,7 @@ const Body = () => {
   useLayoutEffect(() => {
 
     const items = document.querySelectorAll('.sec1-wrapper>div')
+    // const div = document.querySelector('.sec1-wrapper')
 
     items.forEach(item => {
       // Add mouse enter and leave event listeners
@@ -69,7 +72,7 @@ const Body = () => {
         {
           repeat: -1,
           speed: 0.07,
-          paddingRight: 12
+          paddingRight: 12,
         });
 
       loopRef.current = loop;
@@ -89,18 +92,43 @@ const Body = () => {
           slow.invalidate().restart(); // now decelerate
           const visibleDiv = Number(getLeftDivs(items))
           if (visibleDiv !== result || visibleDiv === 0) setResult(visibleDiv)
-          console.log(visibleDiv)
+          setPercent(calculateCompletion())
+          console.log(calculateCompletion())
+
         }
       });
+
+
+      function calculateCompletion() {
+        // let totalDistance = 2436
+        let progress = loop.progress();  // GSAP provides the timeline progress as 0 to 1
+        // let completionPercentage = (progress * totalDistance) % totalDistance;
+        // let percentage = Math.floor((completionPercentage / totalDistance) * 100);
+        let percentage = Math.floor(progress * 100);
+        return percentage.toString().padStart(2, '0');
+      }
 
     }
 
   }, [])
 
+  
+
+  // function calculatePercentage() {
+  //   let totalDistance = 2436
+  //   let currentPosition = 200
+  //   let effectivePosition = currentPosition % totalDistance;
+
+  //   // Calculate the completion percentage
+  //   let completionPercentage = (effectivePosition / totalDistance) * 100;
+  
+  //   return completionPercentage.toFixed(2);
+  // }
+
   function barClick(e) {
     e.stopPropagation();
     const barId = Number(e.target.id.slice(3));
-    console.log(barId)
+    // console.log(barId)
     if (loopRef.current) {
       loopRef.current.timeScale(1)
       loopRef.current.toIndex(barId, {
@@ -114,12 +142,12 @@ const Body = () => {
 
   function goToProductPage(e) {
     const id = e.target.closest('[id]').id; // Get the closest parent with an id attribute
-    console.log(id)
+    // console.log(id)
     const item = document.getElementById(id);
 
     if (!item) {
-        console.error(`Element with id ${id} not found.`);
-        return; // Exit if item is null
+      console.error(`Element with id ${id} not found.`);
+      return; // Exit if item is null
     }
 
     const img = item.querySelector('img');
@@ -132,18 +160,7 @@ const Body = () => {
     // Get the position and dimensions of the image
     const rect = img.getBoundingClientRect();
 
-    console.log(rect);
-
-
-    // gsap.to(img, {
-    //   scale: 2,
-    //   duration: 1.3,
-    //   // x: -700,
-    //   onComplete: () => {
-    //     // Navigate to the new page after the animation completes
-    //     navigate(`/product/${id}`);
-    //   }
-    // });
+    // console.log(rect);
 
     navigate(`/product/${id}`, {
       state: {
@@ -172,28 +189,32 @@ const Body = () => {
   ]
 
   return (
-    <div className='body-wrapper' ref={containerRef}>
-      <section>
-        <div className='sec1-wrapper'>
-          {
-            arr.map((item, key) => (
-              <div id={key} key={key} onClick={(e) => goToProductPage(e)}><img src={item.src} /></div>
-            ))
-          }
+    <>
+      <Nav />
+      <div className='body-wrapper' ref={containerRef}>
+        <div className='body-percent'>{percent}%</div>
+        <section>
+          <div className='sec1-wrapper'>
+            {
+              arr.map((item, key) => (
+                <div id={key} key={key} onClick={(e) => goToProductPage(e)}><img src={item.src} /></div>
+              ))
+            }
 
-        </div>
-      </section>
-      <section>
-        <div className='sec2-wrapper'>
-          {arr?.map((item, key) => (
-            <div key={key} id={`bar${key}`} onClick={(e) => barClick(e)}>
-              <div></div>
-            </div> // Use the item or any relevant data as the content
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+        <section>
+          <div className='sec2-wrapper'>
+            {arr?.map((item, key) => (
+              <div key={key} id={`bar${key}`} onClick={(e) => barClick(e)}>
+                <div></div>
+              </div> // Use the item or any relevant data as the content
+            ))}
+          </div>
+        </section>
 
-    </div>
+      </div>
+    </>
   )
 }
 
@@ -202,7 +223,7 @@ const Body = () => {
 function horizontalLoop(items, config) {
   items = gsap.utils.toArray(items);
   config = config || {};
-  let tl = gsap.timeline({ repeat: config.repeat, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100) }),
+  let tl = gsap.timeline({ repeat: config.repeat, paused: config.paused, defaults: { ease: "linear" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100) }),
     length = items.length,
     startX = items[0].offsetLeft,
     times = [],

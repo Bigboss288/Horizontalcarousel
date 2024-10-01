@@ -1,0 +1,16 @@
+.nav-wraper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 0.9rem;
+    /* cursor: pointer; */
+    
+}
+
+/* .nav-wraper>:nth-child(1){
+    display: flex;
+    gap: 1rem;
+} */

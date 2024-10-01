@@ -1,0 +1,11 @@
+.footer-wrapper{
+    padding: 1rem;
+    padding-top: 0.5rem;
+}
+
+.footer-wrapper>div{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.8rem;
+}

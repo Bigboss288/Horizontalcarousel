@@ -1,14 +1,17 @@
 // import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './product.css'
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import Footer from '../../Footer/Footer';
+import Nav from '../../Nav/Nav';
 
 const Product = () => {
 
   const location = useLocation();
   const imgRef = useRef(null);
   const [product, setProduct] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (location.state && imgRef.current) {
@@ -28,14 +31,30 @@ const Product = () => {
       // Animate the image to the right side of the screen and scale it up
       gsap.to(img, {
         x: -rect.left + 68, // Move the image to the right side of the screen
-        scale: 1.46,
+        scale: 1.3,
         duration: 1.2,
         ease: "power2.out"
       });
     }
   }, [location.state]);
 
+
+  function goToHomePage(){
+    gsap.to(".page-content", {
+      opacity: 0,       // Fade out the content
+      duration: 0.1,      // Animation duration (1 second)
+      ease: "power1.in", // Easing effect
+      onComplete: () => {
+        // Navigate to the new page once the animation completes
+        navigate("/");
+      }
+    });
+  }
+
   return (
+    <div className='product-page'>
+    <Nav/>
+    <div className='close-btn' onClick={goToHomePage}>Close</div>
     <div className="product-wrapper">
       <div className="product-img"><img ref={imgRef} src={product} alt="img" /></div>
       <div className="product-description">
@@ -56,9 +75,11 @@ const Product = () => {
             <button>Inquire for purchase</button>
           </div>
         </div>
-
       </div>
     </div>
+    <Footer/>
+    </div>
+    
   )
 }
 
