@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Footer from '../../Footer/Footer';
 import Nav from '../../Nav/Nav';
+import Word from '../../WordAnimation/Word';
 
 const Product = () => {
 
@@ -39,10 +40,10 @@ const Product = () => {
   }, [location.state]);
 
 
-  function goToHomePage(){
+  function goToHomePage() {
     gsap.to(".page-content", {
       opacity: 0,       // Fade out the content
-      duration: 0.1,      // Animation duration (1 second)
+      duration: 0.2,      // Animation duration (1 second)
       ease: "power1.in", // Easing effect
       onComplete: () => {
         // Navigate to the new page once the animation completes
@@ -53,33 +54,40 @@ const Product = () => {
 
   return (
     <div className='product-page'>
-    <Nav/>
-    <div className='close-btn' onClick={goToHomePage}>Close</div>
-    <div className="product-wrapper">
-      <div className="product-img"><img ref={imgRef} src={product} alt="img" /></div>
-      <div className="product-description">
-        <div>
-          <div>Breccia Diaspro</div>
-          <div>BOWL 1</div>
-        </div>
-        <div>
+      <Nav />
+      <div className='close-btn' onClick={goToHomePage}>
+        <Word
+          text='Close'
+          fontFamily='Cormorant Garamond", serif'
+          fontStyle='italic'
+          fontSize='0.8rem'
+        />
+      </div>
+      <div className="product-wrapper">
+        <div className="product-img"><img ref={imgRef} src={product} alt="img" /></div>
+        <div className="product-description">
           <div>
-            <div className='p-heading'>Price</div>
-            <div className='p-desc'>4950</div>
+            <div>Breccia Diaspro</div>
+            <div>BOWL 1</div>
           </div>
           <div>
-            <div className='p-heading'>Weight</div>
-            <div className='p-desc'>3</div>
-          </div>
-          <div className='p-btn'>
-            <button>Inquire for purchase</button>
+            <div>
+              <div className='p-heading'>Price</div>
+              <div className='p-desc'>4950</div>
+            </div>
+            <div>
+              <div className='p-heading'>Weight</div>
+              <div className='p-desc'>3</div>
+            </div>
+            <div className='p-btn'>
+              <button>Inquire for purchase</button>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
-    <Footer/>
-    </div>
-    
+
   )
 }
 

@@ -1,0 +1,22 @@
+.card-wrapper{
+  display: flex;
+  height: 17rem;
+  width: 12rem;
+  position: relative;
+  z-index: 1;
+}
+
+.card-wrapper:hover{
+    z-index: 20;
+}
+
+.card-wrapper>img{
+  height: 17rem;
+  width: 12rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card-wrapper>img:hover{
+    transform: scale(1.162);
+}

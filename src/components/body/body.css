@@ -9,7 +9,7 @@
 
 .body-percent{
   position: absolute;
-    top: 2.8%;
+    top: 2.7%;
     left: 8%;
     font-size: 0.8rem;
     font-family: "Cormorant Garamond", serif;
@@ -23,28 +23,6 @@
   gap: 12px;
 }
 
-.sec1-wrapper>div{
-  display: flex;
-  height: 17rem;
-  width: 12rem;
-  position: relative;
-  z-index: 1;
-}
-
-.sec1-wrapper>div:hover{
-  z-index: 20;
-}
-
-.sec1-wrapper > div > img {
-  height: 17rem;
-  width: 12rem;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.sec1-wrapper > div > img:hover {
-  transform: scale(1.162);
-}
 
 .sec2-wrapper{
   position: absolute;

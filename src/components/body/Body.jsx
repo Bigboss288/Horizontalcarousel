@@ -6,6 +6,7 @@ import './body.css'
 import gsap from 'gsap'
 import { Observer } from 'gsap/Observer';
 import Nav from '../Nav/Nav';
+import Card from '../card/Card';
 // import Card from '../card/Card';
 
 gsap.registerPlugin(Observer);
@@ -113,18 +114,6 @@ const Body = () => {
   }, [])
 
   
-
-  // function calculatePercentage() {
-  //   let totalDistance = 2436
-  //   let currentPosition = 200
-  //   let effectivePosition = currentPosition % totalDistance;
-
-  //   // Calculate the completion percentage
-  //   let completionPercentage = (effectivePosition / totalDistance) * 100;
-  
-  //   return completionPercentage.toFixed(2);
-  // }
-
   function barClick(e) {
     e.stopPropagation();
     const barId = Number(e.target.id.slice(3));
@@ -141,6 +130,7 @@ const Body = () => {
   }
 
   function goToProductPage(e) {
+
     const id = e.target.closest('[id]').id; // Get the closest parent with an id attribute
     // console.log(id)
     const item = document.getElementById(id);
@@ -197,7 +187,8 @@ const Body = () => {
           <div className='sec1-wrapper'>
             {
               arr.map((item, key) => (
-                <div id={key} key={key} onClick={(e) => goToProductPage(e)}><img src={item.src} /></div>
+                // <div id={key} key={key} onClick={(e) => goToProductPage(e)}><img src={item.src} /></div>
+                <Card id={key} key={key} src={item.src} click={(e) => goToProductPage(e)}/>
               ))
             }
 
