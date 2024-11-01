@@ -1,17 +1,19 @@
 // import React from 'react';
 import PropTypes from 'prop-types';
 import './card.css';
+import { useRef } from 'react';
 
 const Card = ({ id, src, click }) => {
-  const cardClicked = (e) => {
-    if (click) {
-      click(e); // Call the click function if it exists
-    }
-  };
+  const imgRef = useRef(null);
+  // const cardClicked = (e) => {
+  //   if (click) {
+  //     click(e); // Call the click function if it exists
+  //   }
+  // };
 
   return (
-    <div className='card-wrapper' id={id} onClick={cardClicked}>
-      <img src={src} alt="Card content" />
+    <div className='card-wrapper' id={id} onClick={(e) => click(e, imgRef.current)}>
+      <img ref={imgRef} src={src} alt="Card content" />
     </div>
   );
 };

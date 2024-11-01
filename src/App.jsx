@@ -1,18 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './assets/components/Home';
-import Product from './assets/components/page/Product/Product';
+import Product from './components/page/Product/Product';
+import Footer from './components/Footer/Footer';
+import Nav from './components/Nav/Nav';
+import Swipe from './components/swipe/Swipe'
 
 
 function App() {
   return (
     <div>
+      <Nav/>
+
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} /> {/* Use 'element' instead of 'component' */}
-          <Route path="/product/:id" element={<Product />} /> {/* Use 'element' instead of 'component' */}
+          <Route path="/" element={<Swipe/>} /> 
+          <Route path="/product/:id" element={<Product />} /> 
         </Routes>
       </Router>
 
+      <Footer/>
+     
     </div>
   );
 }

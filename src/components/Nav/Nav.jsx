@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <div className="nav-wraper">
       <div>
-        <div>Deckers Lane</div>
+        <div>XYZ</div>
       </div>
       <div> 
         <Word text='MENU'

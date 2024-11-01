@@ -4,7 +4,6 @@ import './product.css'
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Footer from '../../Footer/Footer';
-import Nav from '../../Nav/Nav';
 import Word from '../../WordAnimation/Word';
 
 const Product = () => {
@@ -12,6 +11,7 @@ const Product = () => {
   const location = useLocation();
   const imgRef = useRef(null);
   const [product, setProduct] = useState('')
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -54,7 +54,6 @@ const Product = () => {
 
   return (
     <div className='product-page'>
-      <Nav />
       <div className='close-btn' onClick={goToHomePage}>
         <Word
           text='Close'
